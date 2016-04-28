@@ -13,7 +13,7 @@ import javax.swing.Timer;
 
 public class GameEngine {
 	GamePanel gp;
-		
+	private ArrayList<Enemy> en = new ArrayList<Enemy>();		
 	private SpaceShip v;	
 	
 	private Timer timer;
@@ -35,12 +35,18 @@ public class GameEngine {
 		
 	}
 	
+	private void generateEnemy(){
+		Enemy e = new Enemy(100,50);
+		gp.sprites.add(e);
+		en.add(e);
+	}
 	public void start(){
 		timer.start();
 	}
 
 	private void process(){
 		
+		generateEnemy();
 		gp.updateGameUI();
 		
 		
