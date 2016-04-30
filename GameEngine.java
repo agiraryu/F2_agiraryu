@@ -17,6 +17,7 @@ public class GameEngine {
 	private SpaceShip v;	
 	
 	private Timer timer;
+	private double diff = 0.1;
 	
 	public GameEngine(GamePanel gp, SpaceShip v) {
 		this.gp = gp;
@@ -25,7 +26,6 @@ public class GameEngine {
 		gp.sprites.add(v);
 		
 		timer = new Timer(50, new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				process();
@@ -36,17 +36,39 @@ public class GameEngine {
 	}
 	
 	private void generateEnemy(){
-		Enemy e = new Enemy(100,50);
+		Enemy e = new Enemy((int)(Math.random()*390),50);
 		gp.sprites.add(e);
 		en.add(e);
 	}
+
 	public void start(){
 		timer.start();
 	}
 
 	private void process(){
 		
-		generateEnemy();
+ 		if(Math.random() < diff){
+ 			generateEnemy();	
+ 		}
+ 		Iterator<Enemy> e_iter = en.iterator();
+		while(e_iter.hasNext()){
+			Enemy e = e_iter.next();
+			e.proceed();
+			
+			if(!e.isAlive()){
+				e_iter.remove();
+				gp.sprites.remove(e);
+			}
+		}
+	
+	    gp.updateGameUI();
+		
+		Rectangle2D.Double er;
+		for(Enemy e : en){
+			er = e.getRectangle();
+		}
+		
+		
 		gp.updateGameUI();
 		
 		

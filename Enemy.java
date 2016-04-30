@@ -28,5 +28,15 @@ public class Enemy extends Sprite{
 		g.fillRect(x, y, width, height);
 		
 	}
+	public void proceed(){
+ 		y += step;
+ 		if(y > Y_TO_DIE){
+ 			alive = false;
+ 		}
+ 	}
+ 
+ 	public boolean isAlive(){
+ 		return alive;
+ 	}
 
 }
