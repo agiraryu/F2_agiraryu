@@ -11,7 +11,7 @@ import java.util.Iterator;
 import javax.swing.Timer;
 
 
-public class GameEngine {
+public class GameEngine implements KeyListener{ 
 	GamePanel gp;
 	private ArrayList<Enemy> en = new ArrayList<Enemy>();		
 	private SpaceShip v;	
@@ -60,18 +60,39 @@ public class GameEngine {
 				gp.sprites.remove(e);
 			}
 		}
-	
-	    gp.updateGameUI();
-		
-		Rectangle2D.Double er;
-		for(Enemy e : en){
-			er = e.getRectangle();
-		}
-		
 		
 		gp.updateGameUI();
 		
-		
-	
 	}
+	void controlVehicle(KeyEvent e) {
+ 		switch (e.getKeyCode()) {
+ 		case KeyEvent.VK_LEFT:
+ 			v.move(-1);
+ 			break;
+ 		case KeyEvent.VK_RIGHT:
+ 			v.move(1);
+ 			break;
+ 		case KeyEvent.VK_D:
+ 			diff += 0.1;
+ 			break;
+ 		}
+ 	}
+ 
+ 	
+ 	
+ 	@Override
+ 	public void keyPressed(KeyEvent e) {
+ 		controlVehicle(e);
+	}
+ 
+ 	@Override
+ 	public void keyReleased(KeyEvent e) {
+ 		//do nothing
+ 	}
+ 
+ 	@Override
+ 	public void keyTyped(KeyEvent e) {
+ 		//do nothing		
+ 	}
+ 
 }
