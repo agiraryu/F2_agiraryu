@@ -11,7 +11,7 @@ import java.util.Iterator;
 import javax.swing.Timer;
 
 
-public class GameEngine implements KeyListener{ 
+public class GameEngine implements KeyListener , GameReporter{ 
 	GamePanel gp;
 	private ArrayList<Enemy> en = new ArrayList<Enemy>();		
 	private SpaceShip v;	
@@ -43,6 +43,7 @@ public class GameEngine implements KeyListener{
 
 	public void start(){
 		timer.start();
+		
 	}
 
 	private void process(){
@@ -61,7 +62,7 @@ public class GameEngine implements KeyListener{
 			}
 		}
 		
-		gp.updateGameUI();
+		gp.updateGameUI(this);
 		
 		Rectangle2D.Double vr = v.getRectangle();
 		Rectangle2D.Double er;
@@ -76,6 +77,7 @@ public class GameEngine implements KeyListener{
   	}
 	public void die(){
 		timer.stop();
+		System.out.println("Game Over!!!!");
 
 	}
 	void controlVehicle(KeyEvent e) {
